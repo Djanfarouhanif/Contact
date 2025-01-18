@@ -12,8 +12,25 @@ module.exports = {
         'link': '#f33cc5'
       },
       screens: {
-        'screen': {'max': '900px'}
+        'screen': {'max': '900px' }
+      },
+      boxShadow: {
+        'shad': ' 2px 2px 1px '
+      },
+      animation: {
+        speed: 'speed 10s infinite linear'
+      },
+      keyframes: {
+        speed: {
+          '0%':{transform: 'translateX(0%)'},
+          '100%': {transform: 'translateX(calc(-300px * 5))'}
+        }
+      },
+      width: {
+        "l30": 'calc(300px * 10)'
       }
+    
+
     },
   },
   plugins: [],
