@@ -1,8 +1,94 @@
 
 
- <div class="">
-    <!-- nav bar -->
-    <div>
-        
+ <div class="px-20">
+
+    <!-- homer -->
+    <div id="home" class="min-h-[100vh] flex   flex-col items-center">
+        <!-- nav bar -->
+        <div class="flex justify-between w-full h-[100px] items-center">
+            <!-- Logo -->
+             <div class="w-[150px]  text-link font-bold  flex items-center text-[20px]">LinkTrac</div>
+             <!-- nav content -->
+              <div [ngClass]="isMenuOpen ? 'screen:translate-y-44': 'screen:-translate-y-56'" class="flex screen:flex-1 screen:relative screen:gap-4  screen:p-20 screen:pt-5 screen:rounded-lg screen:bg-black/90 screen:text-white gap-8 text-[20px] items-center screen:flex-col transition-all ">
+                
+                 <div><a href="home">Home</a></div>
+                 <div>about</div>
+                 <div>precing</div>
+                 <div>Testimoniale</div>
+                 <!-- CTA -->
+                  <div class="bg-btn px-3 rounded-xl text-white w-[150px] h-[40px] flex justify-center items-center">Start for free</div>
+              </div>
+              <div (click)="toggleMenu()" class="hidden screen:flex cursor-pointer">Hani</div>
+        </div>
+        <!-- Content -->
+        <div class="pt-20">
+            <!-- text -->
+             <div class="text-center">
+                <!-- grand titre -->
+                <div>
+                    <h1 class="text-[54px]">Organize your work</h1>
+                    <h1 class="text-[54px]">and life, finally.</h1>
+                </div>
+                <!-- Sous titre -->
+                 <div>
+                    <h3 class="text-[20px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, velit.</h3>
+                    <h3 class="text-[20px]">Lorem ipsum dolor sit amet consectetur.</h3>
+                 </div>
+             </div>
+             <!-- button CTA -->
+              <div class="flex justify-center pt-10">
+                <button class="text-[22px] h-[40px] bg-btn w-[150px] flex justify-center items-center rounded-xl text-white">Star for free</button>
+              </div>
+        </div>
     </div>
+    <!-- preuve  -->
+     <div class="min-h-[70vh] flex  flex-col items-center">
+            <div class="text-center pb-10">
+                <h1 class="text-[54px] ">5 micro saas déja crée</h1>
+                <h3 class="text-[30px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, quis. </h3>
+            </div>
+            <!-- presentation en image -->
+            <div class="flex flex-wrap gap-16">
+                <!-- items1 -->
+                <div class=" w-[200px] flex flex-col ">
+                    <!-- image -->
+                    <div class="w-[90px] "><img src="../../assets/image/hanif.JPG" alt=""></div>
+                    <div class="">
+                        <h1>Lorem, ipsum.</h1>
+                        <div class="flex flex-col pl-3">
+                            <span>X Lorem ipsum dolor s</span>
+                            <span>X Lorem ipsum dolor s</span>
+                            <span>X Lorem ipsum dolor s</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- items1 -->
+                 <div class=" w-[200px] flex flex-col ">
+                    <!-- image -->
+                    <div class="w-[90px] "><img src="../../assets/image/hanif.JPG" alt=""></div>
+                    <div class="">
+                        <h1>Lorem, ipsum.</h1>
+                        <div class="flex flex-col pl-3">
+                            <span>X Lorem ipsum dolor s</span>
+                            <span>X Lorem ipsum dolor s</span>
+                            <span>X Lorem ipsum dolor s</span>
+                        </div>
+                    </div>
+                </div>
+                 <!-- items1 -->
+                 <div class=" w-[200px] flex flex-col ">
+                    <!-- image -->
+                    <div class="w-[90px] "><img src="../../assets/image/hanif.JPG" alt=""></div>
+                    <div class="">
+                        <h1>Lorem, ipsum.</h1>
+                        <div class="flex flex-col pl-3">
+                            <span>X Lorem ipsum dolor s</span>
+                            <span>X Lorem ipsum dolor s</span>
+                            <span>X Lorem ipsum dolor s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </div>
  </div>
