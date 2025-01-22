@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,11 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent {
   isMenuOpen = false;
 
+  constructor(private router:Router){}
+
+ navigate():any{
+    this.router.navigate(['/signup'])
+ }
 
   // Fonction pour toggle le menu sur petit ecrean
   toggleMenu():void{

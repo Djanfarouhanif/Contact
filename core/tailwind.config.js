@@ -15,7 +15,7 @@ module.exports = {
         'screen': {'max': '900px' }
       },
       boxShadow: {
-        'shad': ' 2px 2px 1px '
+        'shad': ' 0px 0px 2px 1px'
       },
       animation: {
         speed: 'speed 10s infinite linear'
