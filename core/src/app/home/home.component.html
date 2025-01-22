@@ -12,10 +12,10 @@
               <div [ngClass]="isMenuOpen ? 'screen:translate-y-44': 'screen:-translate-y-56'" class="flex screen:flex-1 screen:relative screen:gap-4  screen:p-20 screen:pt-5 screen:rounded-lg screen:bg-black/90 screen:text-white gap-8 text-[20px] items-center screen:flex-col transition-all ">
                 
                  <div class="cursor-pointer"><a href="home">Home</a></div>
-                 <div class="cursor-pointer">SignUp</div>
-                 <div class="cursor-pointer">Login</div>
+                 <div (click)="navigateToSignUp()" class="cursor-pointer">SignUp</div>
+                 <div (click)="navigateToLogin()" class="cursor-pointer">Login</div>
                  <!-- CTA -->
-                  <div (click)="navigate()" class="bg-btn cursor-pointer px-3 rounded-xl text-white w-[150px] h-[40px] flex justify-center items-center">Start for free</div>
+                  <div (click)="navigateToSignUp()" class="bg-btn cursor-pointer px-3 rounded-xl text-white w-[150px] h-[40px] flex justify-center items-center">Start for free</div>
               </div>
               <div (click)="toggleMenu()" class="hidden screen:flex cursor-pointer"><svg height="25" width="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4.5 6.5h15M4.5 12h15m-15 5.5h15" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
@@ -39,7 +39,7 @@
              </div>
              <!-- button CTA -->
               <div class="flex justify-center pt-10">
-                <button (click)="navigate()" class="text-[22px] h-[40px] bg-btn w-[150px] flex justify-center items-center rounded-xl text-white">Star for free</button>
+                <button (click)="navigateToSignUp()" class="text-[22px] h-[40px] bg-btn w-[150px] flex justify-center items-center rounded-xl text-white">Star for free</button>
               </div>
         </div>
     </div>

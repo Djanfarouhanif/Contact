@@ -14,8 +14,11 @@ export class HomeComponent {
 
   constructor(private router:Router){}
 
- navigate():any{
+ navigateToSignUp():any{
     this.router.navigate(['/signup'])
+ }
+ navigateToLogin():any{
+  this.router.navigate(['/login'])
  }
 
   // Fonction pour toggle le menu sur petit ecrean

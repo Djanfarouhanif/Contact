@@ -12,7 +12,11 @@ export class SignupComponent {
 
 
     constructor(private router:Router){}
-    navigate():any{
+    navigateToCreate():any{
       this.router.navigate(['/create']);
+    }
+
+    navigateToLogin():any{
+      this.router.navigate(['/login'])
     }
 }
