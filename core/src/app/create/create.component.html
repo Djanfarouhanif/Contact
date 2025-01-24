@@ -38,10 +38,10 @@
                 <div class=" flex p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
                     <div>Linkedin</div>
                     <!-- Trois poin pour suprimer -->
-                    <div (click)="LinkMenu()" class="cursor-pointer"> 3</div>
+                    <div (click)="LinkMenu('menu1')" class="cursor-pointer"> 3</div>
                 </div>
                 <!-- menu nodification pour suprimer -->
-                 <div [ngClass]="openMenu ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all -right-[72px] top-1 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
+                 <div [ngClass]="openMenus['menu1'] ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all -right-[72px] top-1 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
              </div>
 
              <!-- Premier projet crée -->
@@ -49,10 +49,10 @@
                 <div class=" flex p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
                     <div>Linkedin</div>
                     <!-- Trois poin pour suprimer -->
-                    <div (click)="LinkMenu()" class="cursor-pointer"> 3</div>
+                    <div (click)="LinkMenu('menu2')" class="cursor-pointer"> 3</div>
                 </div>
                 <!-- menu nodification pour suprimer -->
-                 <div [ngClass]="openMenu ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all -right-[72px] top-1 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
+                 <div [ngClass]="openMenus['menu2'] ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all -right-[72px] top-1 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
              </div>
            
          </div>

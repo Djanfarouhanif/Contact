@@ -11,12 +11,12 @@ import { CommonModule } from '@angular/common';
 export class CreateComponent {
 
     isOpen:Boolean = false;
-    openMenu:Boolean = false;
+    openMenus: {[key: string]: boolean} = {}
 
 
     // Fonction pour faire sortire le petit menu des projet crée
-    LinkMenu():any{
-      this.openMenu = !this.openMenu;
+    LinkMenu(menuId: string):any{
+      this.openMenus[menuId] = !this.openMenus[menuId]
     }
 
     // Fonction pour ajouter un nouveau projet
