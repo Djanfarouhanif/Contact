@@ -31,10 +31,10 @@
      <div class="pt-20 ">
 
         <!-- lient list crée -->
-         <div class="w-[200px] shadow-shad rounded-lg p-2 relative">
+         <div class="h-[70px] flex items-center gap-4 shadow-shad rounded-lg p-2 relative">
 
             <!-- Premier projet crée -->
-             <div class="relative pt-4">
+             <div class="relative ">
                 <div class=" flex p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
                     <div>Linkedin</div>
                     <!-- Trois poin pour suprimer -->
@@ -45,7 +45,7 @@
              </div>
 
              <!-- Premier projet crée -->
-             <div class="relative pt-4">
+             <div class="relative ">
                 <div class=" flex p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
                     <div>Linkedin</div>
                     <!-- Trois poin pour suprimer -->
@@ -58,8 +58,12 @@
          </div>
 
         <!-- Presentation de nombre de click par projet -->
-         <div>
-             <div></div>
+         <div class="flex justify-center items-center pt-20">
+             <div class="w-[300px] h-[300px] shadow-shad" >
+                <div class="chart-container">
+                    <canvas id="MyChart">{{ chart }}</canvas>
+                </div>
+             </div>
          </div>
      </div>
 </div>
