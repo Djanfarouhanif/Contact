@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import Chart from 'chart.js/auto';
+import { Chart } from 'chart.js';
+
+
 
 @Component({
   selector: 'app-create',
@@ -9,13 +11,28 @@ import Chart from 'chart.js/auto';
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
 })
-export class CreateComponent {
+export class CreateComponent implements AfterViewInit  {
+  
+  isOpen:Boolean = false;
+  openMenus: {[key: string]: boolean} = {};
 
-    isOpen:Boolean = false;
-    openMenus: {[key: string]: boolean} = {};
-    public chart: any;
+  @ViewChild('chartCanvas', { static: true }) chartCanvas!: ElementRef;
 
-
+  ngAfterViewInit() {
+    new Chart(this.chartCanvas.nativeElement, {
+      type: 'bar', // Type de graphique
+      data: {
+        labels: ['A', 'B', 'C'], // Étiquettes
+        datasets: [
+          {
+            label: 'Données simples',
+            data: [10, 20, 30], // Données
+            backgroundColor: ['red', 'blue', 'green'], // Couleurs
+          },
+        ],
+      },
+    });
+  }
     // Fonction pour faire sortire le petit menu des projet crée
     LinkMenu(menuId: string):any{
       this.openMenus[menuId] = !this.openMenus[menuId]
@@ -27,33 +44,5 @@ export class CreateComponent {
     }
 
     // Graphique pour chart
-    createChart(){
-
-      this.chart = new Chart("MyChart", {
-        type: 'bar', //this denotes tha type of chart
-  
-        data: {// values on X-Axis
-          labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-                                   '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
-             datasets: [
-            {
-              label: "Sales",
-              data: ['467','576', '572', '79', '92',
-                                   '574', '573', '576'],
-              backgroundColor: 'blue'
-            },
-            {
-              label: "Profit",
-              data: ['542', '542', '536', '327', '17',
-                                       '0.00', '538', '541'],
-              backgroundColor: 'limegreen'
-            }  
-          ]
-        },
-        options: {
-          aspectRatio:2.5
-        }
-  
-      });
-    }
+   
 }
