@@ -35,35 +35,36 @@
 
             <!-- Premier projet crée -->
              <div class="relative ">
-                <div class=" flex p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
+                <div class=" flex gap-2 p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
                     <div>Linkedin</div>
                     <!-- Trois poin pour suprimer -->
                     <div (click)="LinkMenu('menu1')" class="cursor-pointer"> 3</div>
                 </div>
                 <!-- menu nodification pour suprimer -->
-                 <div [ngClass]="openMenus['menu1'] ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all -right-[72px] top-1 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
+                 <div [ngClass]="openMenus['menu1'] ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all right-1  -top-10 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
              </div>
 
              <!-- Premier projet crée -->
+             <!-- Premier projet crée -->
              <div class="relative ">
-                <div class=" flex p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
+                <div class=" flex gap-2 p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
                     <div>Linkedin</div>
                     <!-- Trois poin pour suprimer -->
-                    <div (click)="LinkMenu('menu2')" class="cursor-pointer"> 3</div>
+                    <div (click)="LinkMenu('menu')" class="cursor-pointer"> 3</div>
                 </div>
                 <!-- menu nodification pour suprimer -->
-                 <div [ngClass]="openMenus['menu2'] ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all -right-[72px] top-1 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
+                 <div [ngClass]="openMenus['menu'] ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all right-1  -top-10 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
              </div>
            
          </div>
 
         <!-- Presentation de nombre de click par projet -->
          <div class="flex justify-center items-center pt-20">
-             <div class="w-[300px] h-[300px] shadow-shad" >
+             <div class="w-[500px] shadow-shad rounded-xl" >
 
-                <div class="chart-container">
+                <div class="h-full">
                     
-                   <div style="width: 80%; margin: auto;">
+                   <div class="h-full">
                     <canvas id="MyChart">{{chart}}</canvas>
                     </div>
 

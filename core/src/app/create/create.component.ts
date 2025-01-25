@@ -20,14 +20,14 @@ export class CreateComponent implements OnInit  {
   openMenus: {[key: string]: boolean} = {};
 
   public config: any = {
-    type: 'bar',
+    type: 'line',
 
     
      data : {
-      labels: ["Janvier", 'FEB', 'MAR', 'APRIL'],
+      labels: ["Lundi", 'Mardi', 'Mercredi', 'Jeudi','Vendredi', 'Samedi', 'Dimache'],
       datasets: [{
         label: 'My First Dataset',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: [105, 159, 890, 181, 506, 55, 440],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(255, 159, 64, 0.2)',
