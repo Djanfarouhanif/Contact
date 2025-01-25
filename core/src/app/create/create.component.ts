@@ -1,25 +1,64 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
-import { Chart } from 'chart.js';
-import { provideCharts,BaseChartDirective,withDefaultRegisterables } from 'ng2-charts';
+import {Chart, registerables} from 'chart.js';
 
-
+Chart.register(...registerables)
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.css',
-  providers: [provideCharts(withDefaultRegisterables())]
+
+
 })
-export class CreateComponent  {
+export class CreateComponent implements OnInit  {
   
   isOpen:Boolean = false;
   openMenus: {[key: string]: boolean} = {};
 
+  public config: any = {
+    type: 'bar',
+
+    
+     data : {
+      labels: ["Janvier", 'FEB', 'MAR', 'APRIL'],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [65, 59, 80, 81, 56, 55, 40],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
+        ],
+        borderWidth: 1
+      }]
+    }
+  }
+
+chart: any
+ngOnInit(): void {
+  this.chart = new Chart('MyChart', this.config);
+}
+  
  
-    // Fonction pour faire sortire le petit menu des projet crée
+  // Fonction pour faire sortire le petit menu des projet crée
+
     LinkMenu(menuId: string):any{
       this.openMenus[menuId] = !this.openMenus[menuId]
     }
