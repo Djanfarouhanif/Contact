@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Chart } from 'chart.js';
+import { provideCharts,BaseChartDirective,withDefaultRegisterables } from 'ng2-charts';
 
 
 
@@ -9,30 +10,15 @@ import { Chart } from 'chart.js';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './create.component.html',
-  styleUrl: './create.component.css'
+  styleUrl: './create.component.css',
+  providers: [provideCharts(withDefaultRegisterables())]
 })
-export class CreateComponent implements AfterViewInit  {
+export class CreateComponent  {
   
   isOpen:Boolean = false;
   openMenus: {[key: string]: boolean} = {};
 
-  @ViewChild('chartCanvas', { static: true }) chartCanvas!: ElementRef;
-
-  ngAfterViewInit() {
-    new Chart(this.chartCanvas.nativeElement, {
-      type: 'bar', // Type de graphique
-      data: {
-        labels: ['A', 'B', 'C'], // Étiquettes
-        datasets: [
-          {
-            label: 'Données simples',
-            data: [10, 20, 30], // Données
-            backgroundColor: ['red', 'blue', 'green'], // Couleurs
-          },
-        ],
-      },
-    });
-  }
+ 
     // Fonction pour faire sortire le petit menu des projet crée
     LinkMenu(menuId: string):any{
       this.openMenus[menuId] = !this.openMenus[menuId]
