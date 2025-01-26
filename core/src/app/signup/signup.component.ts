@@ -1,42 +1,63 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from '../api.service';
-
+import { ApiService } from '../api.service' ; 
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [ReactiveFormsModule, CommonModule ],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrl: './signup.component.css',
+  
+
+
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
+
+  signupForm!: FormGroup;
+
+    constructor(private router:Router, private apiService:ApiService, private fb:FormBuilder){}
 
 
-    constructor(private router:Router, private apiService:ApiService ){}
+    ngOnInit():void {
+      this.signupForm = this.fb.group({
+        username: ['', Validators.required],
+        email : ['', [Validators.required, Validators.email]],
+        password: ['',[Validators.required, Validators.minLength(6)]]
+      })
+    }
 
     // Fonction pour terminer l'envoyer des données depuis backend
     sendData(){
-      const data = {
-        username: "",
-        email: "",
-        password: ""
-      };
-      this.apiService.postData(data).subscribe({
-        next: (response)=>{
-          console.log('Succèss', response)
-        },
-        error: (err)=>{
-          console.error('Erreur dans le composant:', err)
-        }
-      });
+      // Valider la formulaire avant de lancer
+      if (this.signupForm.valid ){
+        // Récuperation des données
+        const data = {
+          username: this.signupForm.get('username')?.value,
+          email: this.signupForm.get('email')?.value,
+          password: this.signupForm.get('password')?.value
+        };
+        // Envoyer de requete post
+        this.apiService.postData(data).subscribe({
+          next: (response)=> {
+            console.log('Succèss', response)
+            this.router.navigate(['/create'])
+          },
+          error: (err)=>{
+            console.error('Erreur dans le composant:', err)
+          }
+        });
+      }else {
+        console.log('Formulaire invalide');
+      }
+     
+     
     }
 
 
       // lES FONCTION POUR NAVIGER SUR UNE NOUVELLE PAGE
-    navigateToCreate():any{
-      this.router.navigate(['/create']);
-    }
+
 
     navigateToLogin():any{
       this.router.navigate(['/login'])

@@ -7,7 +7,7 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://votre-api.com/endpoint' // A Remplacer par le vrai api URL
+  private apiUrl =[ 'http://127.0.0.1:8000/user/'] // A Remplacer par le vrai api URL
 
   constructor(private http:HttpClient) { }
 
@@ -18,7 +18,7 @@ export class ApiService {
       'Content-Type': 'application/json', // Type de données a envoyer 
     });
 
-    return this.http.post(this.apiUrl, data, {headers}).pipe(
+    return this.http.post(this.apiUrl[0], data, {headers}).pipe(
       catchError(error=>{
         console.error('Erreur:', error)
         return throwError(()=>error)

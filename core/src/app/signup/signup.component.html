@@ -3,28 +3,39 @@
         <div class="shadow-shad p-4 rounded-2xl">
             <h1 class="text-[#e5439c] text-center pb-4 text-[40px]">SignUp</h1>
             <!-- Formulaire -->
-            <form action="" class="flex flex-col w-[400px] gap-2">
+            <form [formGroup]="signupForm" (ngSubmit)="sendData()" class="flex flex-col w-[400px] gap-2">
                 <!-- Username -->
                 <div class="flex flex-col gap-1">
                     <label for="username">Username</label>
-                    <input class="transition-all border p-2 rounded-xl outline-none hover:border-[#e5439c]" type="text" placeholder="Username">
+                    <input formControlName="username" class="transition-all border p-2 rounded-xl outline-none hover:border-[#e5439c]" type="text" placeholder="Username">
                 </div>
-            
+                <!-- username -->
+               <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched ">
+                <small class="text-red-500">Le nom d'utilisateur est requis.</small>
+               </div>
             <!-- Email -->
                 
                <div class="flex flex-col gap-1">
                 <label for="Email">Email</label>
-                <input class="transition-all border p-2 rounded-xl outline-none hover:border-[#e5439c]" type="email" placeholder="Email">
+                <input formControlName="email" class="transition-all border p-2 rounded-xl outline-none hover:border-[#e5439c]" type="email" placeholder="Email">
+            </div>
+            <!-- Email -->
+            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+                <small class="text-red-500">Un email valide est requis</small>
             </div>
             <!-- Password -->
                <div class="flex flex-col gap-1">
                 <label for="password">Password</label>
-                <input class="transition-all border p-2 rounded-xl outline-none hover:border-[#e5439c]" type="password" placeholder="Password">
+                <input formControlName="password" class="transition-all border p-2 rounded-xl outline-none hover:border-[#e5439c]" type="password" placeholder="Password">
 
                </div>
+                <!-- Password -->
+                 <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched ">
+                    <small class="text-red-500">Le mot de passe doit contenir au moins 6 caractères.</small>
+                 </div>
                 <!-- Button  -->
                <div class="w-full ">
-                <button (click)="navigateToCreate()" class="text-white w-full p-2  bg-btn rounded-xl ">SignUp</button>
+                <button type="submit" [disabled]="!signupForm.valid" class="text-white w-full p-2  bg-btn rounded-xl ">S'inscrire</button>
                 <div> Vous avez déja un compte <span  (click)="navigateToLogin()" class="cursor-pointer pl-3 text-[#e5439c]">Login</span> </div>
                </div>
                
