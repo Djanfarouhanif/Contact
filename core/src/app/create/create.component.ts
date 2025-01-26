@@ -1,14 +1,15 @@
 import { Component, OnInit  } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
 import {Chart, registerables} from 'chart.js';
+import { ApiService } from '../api.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 Chart.register(...registerables)
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [CommonModule ],
+  imports: [CommonModule,ReactiveFormsModule ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.css',
 
@@ -18,7 +19,29 @@ export class CreateComponent implements OnInit  {
   
   isOpen:Boolean = false;
   openMenus: {[key: string]: boolean} = {};
+  linkForm!: FormGroup;
 
+  constructor(private apiService:ApiService, private fb:FormBuilder){}
+
+  // Récupere les données d'URL
+  getUrls(){
+    const data = {
+      user: 'hanif@gmail.com'
+    }
+    this.apiService.getUrlData().subscribe(
+      {
+        next: reponse =>{
+          console.log('success', reponse);
+        },
+        error: erro =>{
+          console.error('error', erro)
+        }
+      }
+    )
+  }
+
+
+// Données des graphique de chart
   public config: any = {
     type: 'line',
 
@@ -53,9 +76,44 @@ export class CreateComponent implements OnInit  {
 
 chart: any
 ngOnInit(): void {
+
+  this.linkForm = this.fb.group({
+    // Modifier apres pour metre la description
+    email: ['',[Validators.required, Validators.email]],
+    url: ['', [Validators.required]]
+  });
+  // Initialisation du graphique
   this.chart = new Chart('MyChart', this.config);
+  // Récuper tout les objes url crée
+  this.getUrls();
+
 }
   
+  // Fonction pour ajouter un nouveau lien
+  addLink(){
+
+    // Verifier si le formulaire est bon avant de contunier
+    if(this.linkForm.valid){
+      const data = {
+        user: this.linkForm.get('email')?.value,
+        url: this.linkForm.get('url')?.value
+      };
+
+      this.apiService.addLink(data).subscribe({
+        next: response=>{
+          console.log('success',response);
+          this.isOpen = !this.isOpen
+          // Suprimer l'element du formulaire apres l'envoyer
+          this.linkForm.reset()
+        },
+        error: erro=>{
+          console.error('error', erro)
+        }
+      });
+    }
+    
+   
+  };
  
   // Fonction pour faire sortire le petit menu des projet crée
 

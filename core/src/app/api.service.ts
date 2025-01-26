@@ -7,9 +7,38 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl =[ 'http://127.0.0.1:8000/user/'] // A Remplacer par le vrai api URL
+  private apiUrl =[ 'http://127.0.0.1:8000/user/', 'http://127.0.0.1:8000/clicks/','http://127.0.0.1:8000/clicks/create/'] // A Remplacer par le vrai api URL
 
   constructor(private http:HttpClient) { }
+
+  // Fonction pour ajouter un nouveau lien
+  addLink(data:any){
+    const headers = new HttpHeaders({
+     'Content-Type': 'application/json'
+    });
+
+    return this.http.post(this.apiUrl[2], data, {headers}).pipe(
+      catchError(error=>{
+        console.error("erreur", error);
+        return throwError(()=>error)
+      })
+    );
+  };
+
+// Récupurer les url crée
+getUrlData(){
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json', // Type de données a envoyer
+
+  });
+
+  return this.http.get(this.apiUrl[1]).pipe(
+    catchError(error=>{
+      console.error("erreur", error);
+      return throwError(()=>error)
+    })
+  )
+}
 
 
   // Fonction pour enregister les utilisateur

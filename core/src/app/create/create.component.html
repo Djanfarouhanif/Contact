@@ -12,18 +12,19 @@
     <!-- pour ajouter un nouveau projet-->
        <!-- Formulaire pour crée un nouveau projet -->
        <div [ngClass]="isOpen? 'scale-[1]' : 'scale-0' " class="absolute transition-all right-3 p-5 mt-4 shadow rounded-xl bg-[#ccc]">
-        <form action="" class="w-[300px]">
+
+        <form [formGroup]="linkForm" (ngSubmit)="addLink()" class="w-[300px]">
             <div class="flex flex-col mb-3">
                 <label for="name">add description</label>
-                <input class="border p-2 rounded-xl outline-none hover:border-link  transition-all" type="text" placeholder="description" >
+                <input formControlName="email" class="border p-2 rounded-xl outline-none hover:border-link  transition-all" type="text" placeholder="description" >
             </div>
 
             <div class="flex flex-col">
-                <label for="Link">Link</label>
-                <input  class="border p-2 rounded-xl outline-none hover:border-link  transition-all" type="text" placeholder="Link">
+                <label (click)="addLink()" for="Link">Link</label>
+                <input formControlName="url"  class="border p-2 rounded-xl outline-none hover:border-link  transition-all" type="text" placeholder="Link">
             </div>
 
-            <div class="pt-4"><button class="bg-btn p-1 font-bold w-full text-white rounded-xl">Add</button></div>
+            <div class="pt-4"><button [disabled]="!linkForm.value"  class="bg-btn p-1 font-bold w-full text-white rounded-xl">Add</button></div>
         </form>
     </div>
 
