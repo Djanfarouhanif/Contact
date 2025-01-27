@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 
 @Injectable({
@@ -26,18 +26,13 @@ export class ApiService {
   };
 
 // Récupurer les url crée
-getUrlData(){
+getUrlData():Observable<any[]>{
   const headers = new HttpHeaders({
     'Content-Type': 'application/json', // Type de données a envoyer
 
   });
 
-  return this.http.get(this.apiUrl[1]).pipe(
-    catchError(error=>{
-      console.error("erreur", error);
-      return throwError(()=>error)
-    })
-  )
+  return this.http.get<any[]>(this.apiUrl[1])
 }
 
 

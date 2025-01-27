@@ -11,7 +11,7 @@
     </div>
     <!-- pour ajouter un nouveau projet-->
        <!-- Formulaire pour crée un nouveau projet -->
-       <div [ngClass]="isOpen? 'scale-[1]' : 'scale-0' " class="absolute transition-all right-3 p-5 mt-4 shadow rounded-xl bg-[#ccc]">
+       <div [ngClass]="isOpen? 'scale-[1]' : 'scale-0' " class="absolute transition-all right-3 p-5 mt-4 shadow rounded-xl bg-[#ccc] z-30">
 
         <form [formGroup]="linkForm" (ngSubmit)="addLink()" class="w-[300px]">
             <div class="flex flex-col mb-3">
@@ -32,30 +32,21 @@
      <div class="pt-20 ">
 
         <!-- lient list crée -->
-         <div class="h-[70px] flex items-center gap-4 shadow-shad rounded-lg p-2 relative">
+         <div class="h-[70px] flex items-center gap-4 shadow-shad rounded-lg p-2 relative scroll-smooth overflow-x-auto">
 
             <!-- Premier projet crée -->
-             <div class="relative ">
-                <div class=" flex gap-2 p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
+             <div *ngFor="let urldata of urlDatas" class="relative ">
+                <div class=" flex gap-2 p-2 justify-between items-center rounded-2xl bg-btn text-white font-bold shadow-shad">
                     <div>Linkedin</div>
                     <!-- Trois poin pour suprimer -->
-                    <div (click)="LinkMenu('menu1')" class="cursor-pointer"> 3</div>
+                    <div (click)="LinkMenu(urldata.unique_code)" class="cursor-pointer"> <svg fill="#ffffff" width="14px" height="14px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="play"></g> <g id="stop"></g> <g id="pause"></g> <g id="replay"></g> <g id="next"></g> <g id="Layer_8"></g> <g id="search"></g> <g id="list"></g> <g id="love"></g> <g id="menu"> <g> <g> <path d="M14,7c0,0.55,0.45,1,1,1h2c0.55,0,1-0.45,1-1V5c0-0.55-0.45-1-1-1h-2c-0.55,0-1,0.45-1,1V7z"></path> <path d="M17,9h-2c-1.103,0-2-0.897-2-2V5c0-1.103,0.897-2,2-2h2c1.103,0,2,0.897,2,2v2C19,8.103,18.103,9,17,9z M17,7v1V7L17,7 L17,7z M15,5v2h1.997L17,5H15z"></path> </g> <g> <path d="M14,17c0,0.55,0.45,1,1,1h2c0.55,0,1-0.45,1-1v-2c0-0.55-0.45-1-1-1h-2c-0.55,0-1,0.45-1,1V17z"></path> <path d="M17,19h-2c-1.103,0-2-0.897-2-2v-2c0-1.103,0.897-2,2-2h2c1.103,0,2,0.897,2,2v2C19,18.103,18.103,19,17,19z M17,17v1V17 L17,17L17,17z M15,15v2h1.997L17,15H15z"></path> </g> <g> <path d="M14,27c0,0.55,0.45,1,1,1h2c0.55,0,1-0.45,1-1v-2c0-0.55-0.45-1-1-1h-2c-0.55,0-1,0.45-1,1V27z"></path> <path d="M17,29h-2c-1.103,0-2-0.897-2-2v-2c0-1.103,0.897-2,2-2h2c1.103,0,2,0.897,2,2v2C19,28.103,18.103,29,17,29z M17,27v1V27 L17,27L17,27z M15,25v2h1.997L17,25H15z"></path> </g> </g> </g> <g id="add"></g> <g id="headset"></g> <g id="random"></g> <g id="music"></g> <g id="setting"></g> <g id="Layer_17"></g> <g id="Layer_18"></g> <g id="Layer_19"></g> <g id="Layer_20"></g> <g id="Layer_21"></g> <g id="Layer_22"></g> <g id="Layer_23"></g> <g id="Layer_24"></g> <g id="Layer_25"></g> <g id="Layer_26"></g> </g></svg> </div>
                 </div>
                 <!-- menu nodification pour suprimer -->
-                 <div [ngClass]="openMenus['menu1'] ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all right-1  -top-10 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
+                 <div [ngClass]="openMenus[urldata.unique_code] ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all right-1  -top-10 cursor-pointer bg-[#ccc] text-center rounded-lg ">suprimer</div>
              </div>
 
-             <!-- Premier projet crée -->
-             <!-- Premier projet crée -->
-             <div class="relative ">
-                <div class=" flex gap-2 p-2 justify-between rounded-2xl bg-btn text-white font-bold shadow-shad">
-                    <div>Linkedin</div>
-                    <!-- Trois poin pour suprimer -->
-                    <div (click)="LinkMenu('menu')" class="cursor-pointer"> 3</div>
-                </div>
-                <!-- menu nodification pour suprimer -->
-                 <div [ngClass]="openMenus['menu'] ? 'scale-[1]': 'scale-[0]' " class="absolute p-1 transition-all right-1  -top-10 cursor-pointer bg-[#ccc] text-center rounded-lg">suprimer</div>
-             </div>
+             
+            
            
          </div>
 

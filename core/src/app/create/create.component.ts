@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {Chart, registerables} from 'chart.js';
 import { ApiService } from '../api.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Data } from '../data';
 
 Chart.register(...registerables)
 
@@ -20,37 +21,46 @@ export class CreateComponent implements OnInit  {
   isOpen:Boolean = false;
   openMenus: {[key: string]: boolean} = {};
   linkForm!: FormGroup;
+  urlDatas: Data[] = [];
+
 
   constructor(private apiService:ApiService, private fb:FormBuilder){}
 
   // Récupere les données d'URL
-  getUrls(){
+  getUrls():void {
+
     const data = {
       user: 'hanif@gmail.com'
     }
     this.apiService.getUrlData().subscribe(
-      {
-        next: reponse =>{
-          console.log('success', reponse);
-        },
-        error: erro =>{
-          console.error('error', erro)
-        }
+     {
+      next: (data) =>{
+       
+      this.urlDatas = data
+      // After I change email by the link name 
+      const emailData = data.map((urlData)=> urlData.user);
+      const clickData = data.map((urlData)=>urlData.clicks);
+      console.log(clickData);
+      this.updateChartData(clickData, emailData);
+     
+      },
+      error: (erro)=>{
+        console.log('error', erro);
       }
+     }
+    
     )
   }
 
 
 // Données des graphique de chart
   public config: any = {
-    type: 'line',
-
-    
+    type: 'bar',
      data : {
-      labels: ["Lundi", 'Mardi', 'Mercredi', 'Jeudi','Vendredi', 'Samedi', 'Dimache'],
+      labels: ['',''],
       datasets: [{
         label: 'My First Dataset',
-        data: [105, 159, 890, 181, 506, 55, 440],
+        data: [0],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(255, 159, 64, 0.2)',
@@ -86,8 +96,20 @@ ngOnInit(): void {
   this.chart = new Chart('MyChart', this.config);
   // Récuper tout les objes url crée
   this.getUrls();
-
+  
 }
+
+// Fonction pour mettre ajour les datasete
+updateChartData(newData:any, labelsData:any){
+  if(this.chart && this.chart.data && this.chart.data.datasets){
+    console.log("********************", labelsData);
+    this.chart.data.labels = labelsData
+    this.chart.data.datasets[0].data = newData
+    this.chart.update(); // Mettre ajour les information
+  }
+ 
+};
+
   
   // Fonction pour ajouter un nouveau lien
   addLink(){
