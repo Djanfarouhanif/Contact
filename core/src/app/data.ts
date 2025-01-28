@@ -1,7 +1,7 @@
 export interface Data {
 
     id: number;
-    user: string;
+    link_name: string;
     unique_code: string;
     url : string;
     clicks: string;

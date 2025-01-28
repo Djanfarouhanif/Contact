@@ -89,7 +89,7 @@ ngOnInit(): void {
 
   this.linkForm = this.fb.group({
     // Modifier apres pour metre la description
-    email: ['',[Validators.required, Validators.email]],
+    link_name: ['',[Validators.required ]],
     url: ['', [Validators.required]]
   });
   // Initialisation du graphique
@@ -117,7 +117,7 @@ updateChartData(newData:any, labelsData:any){
     // Verifier si le formulaire est bon avant de contunier
     if(this.linkForm.valid){
       const data = {
-        user: this.linkForm.get('email')?.value,
+        user: this.linkForm.get('link_name')?.value,
         url: this.linkForm.get('url')?.value
       };
 
