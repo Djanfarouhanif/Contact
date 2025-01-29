@@ -1,4 +1,4 @@
-export interface Data {
+export interface urlData {
 
     id: number;
     link_name: string;
@@ -7,4 +7,15 @@ export interface Data {
     clicks: string;
     url_output: string
     
+}
+
+export interface signUpData {
+    message: string;
+    username: string;
+    token: string;
+}
+
+export interface loginData {
+    message: string;
+    token: string;
 }

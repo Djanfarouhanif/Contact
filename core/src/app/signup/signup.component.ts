@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ApiService } from '../api.service' ; 
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { signUpData } from '../data';
+
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -39,9 +41,12 @@ export class SignupComponent implements OnInit {
           password: this.signupForm.get('password')?.value
         };
         // Envoyer de requete post
-        this.apiService.postData(data).subscribe({
-          next: (response)=> {
-            console.log('Succèss', response)
+        this.apiService.signUp(data).subscribe({
+          next: (response:signUpData)=> {
+            
+            const token = response.token;
+            console.log(token);
+            localStorage.setItem('token', token);
             this.router.navigate(['/create'])
           },
           error: (err)=>{

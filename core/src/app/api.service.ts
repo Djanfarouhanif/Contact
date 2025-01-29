@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
 import { throwError } from 'rxjs';
+import { loginData, signUpData } from './data';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl =[ 'http://127.0.0.1:8000/user/', 'http://127.0.0.1:8000/clicks/','http://127.0.0.1:8000/clicks/create/'] // A Remplacer par le vrai api URL
+  private apiUrl =[ 'http://127.0.0.1:8000/user/signup/', 'http://127.0.0.1:8000/clicks/get_url/', 'http://127.0.0.1:8000/clicks/create/', 'http://127.0.0.1:8000/login/login/'] // A Remplacer par le vrai api URL
 
   constructor(private http:HttpClient) { }
 
@@ -27,22 +29,37 @@ export class ApiService {
 
 // Récupurer les url crée
 getUrlData():Observable<any[]>{
+  // Récupére token avant 
+  const token = localStorage.getItem('token');
+  console.log("*************")
+  console.log(token)
+  // Hearders pour envoyer les requeste
   const headers = new HttpHeaders({
     'Content-Type': 'application/json', // Type de données a envoyer
+    'Authorization': `Token ${token}`
+   
 
   });
 
-  return this.http.get<any[]>(this.apiUrl[1])
+  return this.http.get<any[]>(this.apiUrl[1], {headers})
 }
 
+// Fonction pour loger l'utilisateur
+loginUser(data:any):Observable<loginData>{
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json', // Type de données a envoyer 
+  });
+
+  return this.http.post<loginData>(this.apiUrl[3], data ,  {headers})
+}
 
   // Fonction pour enregister les utilisateur
-  postData(data:any){
+  signUp(data:any):Observable<signUpData>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json', // Type de données a envoyer 
     });
 
-    return this.http.post(this.apiUrl[0], data, {headers}).pipe(
+    return this.http.post<signUpData>(this.apiUrl[0], data, {headers}).pipe(
       catchError(error=>{
         console.error('Erreur:', error)
         return throwError(()=>error)

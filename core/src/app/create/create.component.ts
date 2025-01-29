@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {Chart, registerables} from 'chart.js';
 import { ApiService } from '../api.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Data } from '../data';
+import { urlData } from '../data';
 
 Chart.register(...registerables)
 
@@ -21,7 +21,7 @@ export class CreateComponent implements OnInit  {
   isOpen:Boolean = false;
   openMenus: {[key: string]: boolean} = {};
   linkForm!: FormGroup;
-  urlDatas: Data[] = [];
+  urlDatas: urlData[] = [];
 
 
   constructor(private apiService:ApiService, private fb:FormBuilder){}
@@ -29,19 +29,16 @@ export class CreateComponent implements OnInit  {
   // Récupere les données d'URL
   getUrls():void {
 
-    const data = {
-      user: 'hanif@gmail.com'
-    }
     this.apiService.getUrlData().subscribe(
      {
       next: (data) =>{
        
       this.urlDatas = data
       // After I change email by the link name 
-      const emailData = data.map((urlData)=> urlData.user);
+      const linkName = data.map((urlData)=> urlData.link_name);
       const clickData = data.map((urlData)=>urlData.clicks);
       console.log(clickData);
-      this.updateChartData(clickData, emailData);
+      this.updateChartData(clickData, linkName);
      
       },
       error: (erro)=>{
@@ -113,7 +110,6 @@ updateChartData(newData:any, labelsData:any){
   
   // Fonction pour ajouter un nouveau lien
   addLink(){
-
     // Verifier si le formulaire est bon avant de contunier
     if(this.linkForm.valid){
       const data = {
