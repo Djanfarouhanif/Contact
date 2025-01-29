@@ -34,6 +34,7 @@ export class CreateComponent implements OnInit  {
       next: (data) =>{
        
       this.urlDatas = data
+      console.log(data)
       // After I change email by the link name 
       const linkName = data.map((urlData)=> urlData.link_name);
       const clickData = data.map((urlData)=>urlData.clicks);
