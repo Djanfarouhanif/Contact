@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
 import { throwError } from 'rxjs';
-import { loginData, signUpData } from './data';
+import { loginData, signUpData,urlData } from './data';
 
 
 @Injectable({
@@ -15,8 +15,12 @@ export class ApiService {
 
   // Fonction pour ajouter un nouveau lien
   addLink(data:any){
+
+    // Récuperer le token en local storage
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-     'Content-Type': 'application/json'
+     'Content-Type': 'application/json',
+     'Authoriation': `Token ${token}`
     });
 
     return this.http.post(this.apiUrl[2], data, {headers}).pipe(
@@ -28,7 +32,7 @@ export class ApiService {
   };
 
 // Récupurer les url crée
-getUrlData():Observable<any[]>{
+getUrlData():Observable<urlData>{
   // Récupére token avant 
   const token = localStorage.getItem('token');
   console.log("*************")
@@ -41,7 +45,7 @@ getUrlData():Observable<any[]>{
 
   });
 
-  return this.http.get<any[]>(this.apiUrl[1], {headers})
+  return this.http.get<urlData>(this.apiUrl[1], {headers})
 }
 
 // Fonction pour loger l'utilisateur

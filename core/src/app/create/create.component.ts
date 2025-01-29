@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import {Chart, registerables} from 'chart.js';
 import { ApiService } from '../api.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { urlData } from '../data';
+import { urlData , urlItem} from '../data';
+
 
 Chart.register(...registerables)
-
 @Component({
   selector: 'app-create',
   standalone: true,
@@ -14,14 +14,14 @@ Chart.register(...registerables)
   templateUrl: './create.component.html',
   styleUrl: './create.component.css',
 
-
 })
+
 export class CreateComponent implements OnInit  {
   
   isOpen:Boolean = false;
   openMenus: {[key: string]: boolean} = {};
   linkForm!: FormGroup;
-  urlDatas: urlData[] = [];
+  urlDatas: urlItem[] = [];
 
 
   constructor(private apiService:ApiService, private fb:FormBuilder){}
@@ -31,13 +31,12 @@ export class CreateComponent implements OnInit  {
 
     this.apiService.getUrlData().subscribe(
      {
-      next: (data) =>{
-       
-      this.urlDatas = data
-      console.log(data)
+      next: (data:urlData) =>{
+        this.urlDatas = data['data'];
+        console.log(this.urlDatas)
       // After I change email by the link name 
-      const linkName = data.map((urlData)=> urlData.link_name);
-      const clickData = data.map((urlData)=>urlData.clicks);
+      const linkName = this.urlDatas.map((urlData)=> urlData.link_name);
+      const clickData = this.urlDatas.map((urlData)=>urlData.clicks);
       console.log(clickData);
       this.updateChartData(clickData, linkName);
      

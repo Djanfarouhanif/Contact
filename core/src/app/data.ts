@@ -1,11 +1,14 @@
+export interface urlItem {
+    id: string;
+    link_name: string;
+    url: string;
+    clicks: number;
+    url_output: string;
+}
+
 export interface urlData {
 
-    id: number;
-    link_name: string;
-    unique_code: string;
-    url : string;
-    clicks: string;
-    url_output: string
+   data: urlItem[]
     
 }
 
@@ -19,3 +22,4 @@ export interface loginData {
     message: string;
     token: string;
 }
+
