@@ -20,7 +20,7 @@ export class ApiService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
      'Content-Type': 'application/json',
-     'Authoriation': `Token ${token}`
+     'Authorization': `Token ${token}`
     });
 
     return this.http.post(this.apiUrl[2], data, {headers}).pipe(

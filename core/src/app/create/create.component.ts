@@ -113,7 +113,7 @@ updateChartData(newData:any, labelsData:any){
     // Verifier si le formulaire est bon avant de contunier
     if(this.linkForm.valid){
       const data = {
-        user: this.linkForm.get('link_name')?.value,
+        link_name: this.linkForm.get('link_name')?.value,
         url: this.linkForm.get('url')?.value
       };
 
