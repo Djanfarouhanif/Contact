@@ -15,16 +15,26 @@
 
         <form [formGroup]="linkForm" (ngSubmit)="addLink()" class="w-[300px]">
             <div class="flex flex-col mb-3">
-                <label for="name">add link_name</label>
-                <input formControlName="link_name" class="border p-2 rounded-xl outline-none hover:border-link  transition-all" type="text" placeholder="description" >
+                <label for="name">Titre</label>
+                <input formControlName="link_name" class="border p-2 rounded-xl outline-none hover:border-link  transition-all" type="text" placeholder="Titre" >
+               
+                <!-- Ligne pour faire la verification -->
+                 <div *ngIf="linkForm.get('link_name')?.invalid && linkForm.get('link_name')?.touched ">
+                    <small class="text-red-500">Ajouter un titre</small>
+                 </div>
             </div>
 
             <div class="flex flex-col">
                 <label (click)="addLink()" for="Link">Link</label>
                 <input formControlName="url"  class="border p-2 rounded-xl outline-none hover:border-link  transition-all" type="text" placeholder="Link">
+
+                <!-- Ligne pour faire la verification et ajouter des message d'erreur -->
+                 <div *ngIf="linkForm.get('url')?.invalid && linkForm.get('url')?.touched">
+                    <small class="text-red-500" >Lien invalid</small>
+                 </div>
             </div>
 
-            <div class="pt-4"><button [disabled]="!linkForm.value"  class="bg-btn p-1 font-bold w-full text-white rounded-xl">Add</button></div>
+            <div class="pt-4"><button type="submit" [disabled]="!linkForm.valid"  class="bg-btn p-1 font-bold w-full text-white rounded-xl">Add</button></div>
         </form>
     </div>
 
@@ -44,11 +54,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-y">
-                        <td class="text-left p-2">Linkedin</td>
-                        <td class="text-left p-2">https//:short.com</td>
+                    <tr class="border-y " *ngFor="let urlData of urlDatas ">
+                        <td class="text-left p-2">{{urlData.link_name}}</td>
+                        <td class="text-left p-2">{{urlData.url_output }}</td>
                         <td class="text-left p-2 ">2025/80/0</td>
-                        <td class="text-left p-2">04</td>
+                        <td class="text-left p-2">{{urlData.clicks}}</td>
                     </tr>
                 </tbody>
             </table>

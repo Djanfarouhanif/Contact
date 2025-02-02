@@ -18,10 +18,10 @@ Chart.register(...registerables)
 
 export class CreateComponent implements OnInit  {
   
-  isOpen:Boolean = false;
+  isOpen:Boolean = false; // AJOUTER UN NOUVEAU PROJET SI BOOLEAN EST A TRUE 
   openMenus: {[key: string]: boolean} = {};
-  linkForm!: FormGroup;
-  urlDatas: urlItem[] = [];
+  linkForm!: FormGroup; // POUR FAIRE GERER LA FORMULAIRE 
+  urlDatas: urlItem[] = [];  // LES DONNEES RECUPER DEPOUS LE BACKEND POUR POUR TOUT LES URLS
 
 
   constructor(private apiService:ApiService, private fb:FormBuilder){}
