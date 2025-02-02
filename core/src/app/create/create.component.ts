@@ -144,6 +144,18 @@ updateChartData(newData:any, labelsData:any){
       this.isOpen = !this.isOpen
     }
 
-    // Graphique pour chart
+    // Fonction pour copier du text
+
+    copyText(text:string){
+     
+
+      if(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          
+        }).catch((errr)=>{
+         
+        })
+      }
+    }
    
 }
