@@ -15,7 +15,7 @@
            </div>
             <!-- Password -->
            <div class="w-full ">
-            <button [disabled]="!loginForm.value" class="text-white w-full p-2  bg-btn rounded-xl ">Login</button>
+            <button [ngClass]="[loginForm.valid ? 'bg-[#e62cd7]': 'bg-[#ec90eda2]']" [disabled]="!loginForm.valid " class="text-white w-full p-2  rounded-xl ">Login</button>
             <div> Crée un compte<span  (click)="navigateToSignUp()" class="cursor-pointer pl-3 text-[#e5439c]">SignUp</span> </div>
            </div>
            

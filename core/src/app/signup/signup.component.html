@@ -35,7 +35,7 @@
                  </div>
                 <!-- Button  -->
                <div class="w-full ">
-                <button type="submit" [disabled]="!signupForm.valid" class="text-white w-full p-2  bg-btn rounded-xl ">S'inscrire</button>
+                <button [ngClass]="[signupForm.valid ? 'bg-btn': 'bg-[#f19bda]']" type="submit" [disabled]="!signupForm.valid" class="text-white w-full p-2   rounded-xl ">S'inscrire</button>
                 <div> Vous avez déja un compte <span  (click)="navigateToLogin()" class="cursor-pointer pl-3 text-[#e5439c]">Login</span> </div>
                </div>
                
