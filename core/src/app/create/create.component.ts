@@ -1,10 +1,11 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, inject, OnInit  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Chart, registerables} from 'chart.js';
 import { ApiService } from '../api.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { urlData , urlItem} from '../data';
-
+import { urlData , urlItem, url} from '../data';
+import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 Chart.register(...registerables)
 @Component({
@@ -22,7 +23,10 @@ export class CreateComponent implements OnInit  {
   openMenus: {[key: string]: boolean} = {};
   linkForm!: FormGroup; // POUR FAIRE GERER LA FORMULAIRE 
   urlDatas: urlItem[] = [];  // LES DONNEES RECUPER DEPOUS LE BACKEND POUR POUR TOUT LES URLS
+  refreshDiv: boolean = true;
 
+  private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   constructor(private apiService:ApiService, private fb:FormBuilder){}
 
@@ -32,7 +36,7 @@ export class CreateComponent implements OnInit  {
     this.apiService.getUrlData().subscribe(
      {
       next: (data:urlData) =>{
-        this.urlDatas = data['data'];
+        this.urlDatas = data.data;
         console.log(this.urlDatas)
       // After I change email by the link name 
       const linkName = this.urlDatas.map((urlData)=> urlData.link_name);
@@ -91,6 +95,7 @@ ngOnInit(): void {
   });
   // Initialisation du graphique
   this.chart = new Chart('MyChart', this.config);
+
   // Récuper tout les objes url crée
   this.getUrls();
   
@@ -118,8 +123,16 @@ updateChartData(newData:any, labelsData:any){
       };
 
       this.apiService.addLink(data).subscribe({
-        next: response=>{
+        next: (response:url) =>{
           console.log('success',response);
+
+          // Ajouter un link a la liste 
+           this.urlDatas.push(response.data)
+          // // Mettre ajour les données
+          //  this.refreshDiv = false
+          
+          // setTimeout(()=> this.refreshDiv = true, 0) // Fonction pour forcer le charger de la page
+
           this.isOpen = !this.isOpen
           // Suprimer l'element du formulaire apres l'envoyer
           this.linkForm.reset()

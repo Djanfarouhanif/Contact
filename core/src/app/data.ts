@@ -5,6 +5,9 @@ export interface urlItem {
     clicks: number;
     url_output: string;
 }
+export interface url {
+    data : urlItem
+}
 
 export interface urlData {
 

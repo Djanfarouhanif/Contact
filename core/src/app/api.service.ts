@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
 import { throwError } from 'rxjs';
-import { loginData, signUpData,urlData } from './data';
+import { loginData, signUpData,urlData , url} from './data';
 
 
 @Injectable({
@@ -14,7 +14,7 @@ export class ApiService {
   constructor(private http:HttpClient) { }
 
   // Fonction pour ajouter un nouveau lien
-  addLink(data:any){
+  addLink(data:any):Observable<url>{
 
     // Récuperer le token en local storage
     const token = localStorage.getItem('token');
@@ -23,7 +23,7 @@ export class ApiService {
      'Authorization': `Token ${token}`
     });
 
-    return this.http.post(this.apiUrl[2], data, {headers}).pipe(
+    return this.http.post<url>(this.apiUrl[2], data, {headers}).pipe(
       catchError(error=>{
         console.error("erreur", error);
         return throwError(()=>error)
