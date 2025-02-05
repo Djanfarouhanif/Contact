@@ -12,7 +12,8 @@ module.exports = {
         'link': '#f33cc5'
       },
       screens: {
-        'screen': {'max': '900px' }
+        'screen': {'max': '900px' },
+        'scR': {'max': '700px'}
       },
       boxShadow: {
         'shad': ' 0px 0px 2px 1px'

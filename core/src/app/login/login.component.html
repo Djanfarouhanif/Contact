@@ -1,7 +1,7 @@
 <div class="min-h-[100vh] flex items-center justify-center">
     <div class="shadow-shad p-4 rounded-2xl">
         <h1 class="text-[#e5439c] text-center pb-4 text-[40px]">Login</h1>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col w-[400px] gap-2">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col w-[400px] scR:w-[300px] gap-2">
             <div class="flex flex-col gap-1">
                 <label for="username">Username</label>
                 <input formControlName="username" class="transition-all border p-2 rounded-xl outline-none hover:border-[#e5439c]" type="text" placeholder="Username">

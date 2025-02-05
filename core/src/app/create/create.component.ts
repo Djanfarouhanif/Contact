@@ -59,7 +59,7 @@ export class CreateComponent implements OnInit  {
      
       },
       error: (erro)=>{
-        console.log('error', erro);
+        // console.log('error', erro);
       }
      }
     
