@@ -9,9 +9,24 @@ import { loginData, signUpData,urlData , url} from './data';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl =[ 'http://127.0.0.1:8000/user/signup/', 'http://127.0.0.1:8000/clicks/get_url/', 'http://127.0.0.1:8000/clicks/create/', 'http://127.0.0.1:8000/login/login/'] // A Remplacer par le vrai api URL
+  private apiUrl =[ 'http://127.0.0.1:8000/user/signup/', 'http://127.0.0.1:8000/clicks/get_url/', 'http://127.0.0.1:8000/clicks/create/', 'http://127.0.0.1:8000/login/login/','http://127.0.0.1:8000/clicks/'] // A Remplacer par le vrai api URL
 
   constructor(private http:HttpClient) { }
+
+  // Fonction pour suiprimer un url
+  deleteLink(unique_code:string):Observable<any>{
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    })
+    return this.http.delete(this.apiUrl[4] + `${unique_code}/delete/`, {headers}).pipe(
+      catchError(error=>{
+        // console.log("erreur", error);
+        return throwError(()=> error)
+      })
+    )
+  };
 
   // Fonction pour ajouter un nouveau lien
   addLink(data:any):Observable<url>{
@@ -25,7 +40,7 @@ export class ApiService {
 
     return this.http.post<url>(this.apiUrl[2], data, {headers}).pipe(
       catchError(error=>{
-        console.error("erreur", error);
+        // console.error("erreur", error);
         return throwError(()=>error)
       })
     );
@@ -35,8 +50,8 @@ export class ApiService {
 getUrlData():Observable<urlData>{
   // Récupére token avant 
   const token = localStorage.getItem('token');
-  console.log("*************")
-  console.log(token)
+  // console.log("*************")
+  // console.log(token)
   // Hearders pour envoyer les requeste
   const headers = new HttpHeaders({
     'Content-Type': 'application/json', // Type de données a envoyer
@@ -65,7 +80,7 @@ loginUser(data:any):Observable<loginData>{
 
     return this.http.post<signUpData>(this.apiUrl[0], data, {headers}).pipe(
       catchError(error=>{
-        console.error('Erreur:', error)
+        // console.error('Erreur:', error)
         return throwError(()=>error)
       })
     );

@@ -14,6 +14,11 @@
 
            </div>
             <!-- Password -->
+
+            <!-- Message d'erreur global -->
+             <div *ngIf="loginErro">
+                <small class="text-red-500">username ou mots de passe incorrect</small>
+             </div>
            <div class="w-full ">
             <button [ngClass]="[loginForm.valid ? 'bg-[#e62cd7]': 'bg-[#ec90eda2]']" [disabled]="!loginForm.valid " class="text-white w-full p-2  rounded-xl ">Login</button>
             <div> Crée un compte<span  (click)="navigateToSignUp()" class="cursor-pointer pl-3 text-[#e5439c]">SignUp</span> </div>

@@ -15,6 +15,7 @@ import { CommonModule} from '@angular/common'
 export class LoginComponent {
 
   loginForm!: FormGroup;
+  loginErro: boolean = false;
 
     constructor(private router:Router, private fb : FormBuilder, private apiService: ApiService){
 
@@ -38,7 +39,7 @@ export class LoginComponent {
         // Execution de la requete pour loger le user 
         this.apiService.loginUser(data).subscribe({
           next: (response:loginData) => {
-            console.log(response.token);
+            // console.log(response.token);
             const token = response.token
             // Enregister le token apres le login
             localStorage.setItem('token',token)
@@ -47,7 +48,7 @@ export class LoginComponent {
             this.navigateToCreate()
           },
           error: erro=>{
-            console.error(erro)
+            this.loginErro = !this.loginErro
           }
         })
       }

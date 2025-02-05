@@ -18,6 +18,7 @@ import { signUpData } from '../data';
 export class SignupComponent implements OnInit {
 
   signupForm!: FormGroup;
+  signupError: boolean = false;
 
     constructor(private router:Router, private apiService:ApiService, private fb:FormBuilder){}
 
@@ -45,16 +46,16 @@ export class SignupComponent implements OnInit {
           next: (response:signUpData)=> {
             
             const token = response.token;
-            console.log(token);
+            // console.log(token);
             localStorage.setItem('token', token);
             this.router.navigate(['/create'])
+
           },
           error: (err)=>{
-            console.error('Erreur dans le composant:', err)
+            // console.error('Erreur dans le composant:', err)
+            this.signupError = !this.signupError
           }
         });
-      }else {
-        console.log('Formulaire invalide');
       }
      
      

@@ -33,7 +33,10 @@
                     <small class="text-red-500" >Lien invalid</small>
                  </div>
             </div>
-
+            <!-- Message d'erreur global -->
+             <div *ngIf="linkError">
+                <small class="text-red-500">url invalid ou erreur de connexion</small>
+             </div>
             <div class="pt-4"><button [ngClass]="[linkForm.valid ? 'bg-btn': 'bg-[#ec90eda2]']" type="submit" [disabled]="!linkForm.valid"  class=" p-1 font-bold w-full text-white rounded-xl">Add</button></div>
         </form>
     </div>
@@ -42,14 +45,14 @@
      <div class="p-20 ">
 
         <!-- lient list crée -->
-        <div *ngIf="urlDatas.length && refreshDiv " class="flex justify-center">
+        <div *ngIf="urlDatas.length" class="flex justify-center">
             <table class="w-full">
                 <thead>
                     <tr class="">
                         <th class="text-left p-2">Titre</th>
-                        <th class="text-left p-2">Url</th>
-                       
+                        <th class="text-left p-2 text-blue-400">Url</th>
                         <th class="text-left p-2">Click</th>
+                        <th class="text-left text-red-500">Suprimer</th>
 
                     </tr>
                 </thead>
@@ -58,6 +61,7 @@
                         <td class="text-left p-2">{{urlData.link_name}}</td>
                         <td class="relative flex items-center gap-1 pl-0 transition-all group text-left p-2 text-blue-500 cursor-pointer text-to-copie z-20" (click)="copyText(urlData.url_output)"><span class="z-0">{{urlData.url_output }} </span> <span class="absolute right-40 hidden group-hover:inline-block transition-all"><svg width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z" stroke="#000000" stroke-width="1.5"></path> <path d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5" stroke="#000000" stroke-width="1.5"></path> </g></svg></span></td>
                         <td class="text-left p-2">{{urlData.clicks}}</td>
+                        <td (click)="delete(urlData.unique_code)"class="text-left p-2 cursor-pointer text-red-500 ">Delete</td>
                     </tr>
                 </tbody>
             </table>

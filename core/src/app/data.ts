@@ -1,5 +1,5 @@
 export interface urlItem {
-    id: string;
+    unique_code: string;
     link_name: string;
     url: string;
     clicks: number;

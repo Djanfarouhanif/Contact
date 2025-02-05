@@ -23,12 +23,25 @@ export class CreateComponent implements OnInit  {
   openMenus: {[key: string]: boolean} = {};
   linkForm!: FormGroup; // POUR FAIRE GERER LA FORMULAIRE 
   urlDatas: urlItem[] = [];  // LES DONNEES RECUPER DEPOUS LE BACKEND POUR POUR TOUT LES URLS
-  refreshDiv: boolean = true;
+  linkError:boolean = false; 
 
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
 
   constructor(private apiService:ApiService, private fb:FormBuilder){}
+
+  // Suprimer un url
+  delete(unique_code:string):void{
+      this.apiService.deleteLink(unique_code).subscribe({
+        next: response=>{
+          // console.log(response, 'success');
+          window.location.reload()
+        },
+        error: erro=>{
+          // console.error('erreur', erro)
+        }
+      })
+  }
 
   // Récupere les données d'URL
   getUrls():void {
@@ -37,11 +50,11 @@ export class CreateComponent implements OnInit  {
      {
       next: (data:urlData) =>{
         this.urlDatas = data.data;
-        console.log(this.urlDatas)
+        // console.log(this.urlDatas)
       // After I change email by the link name 
       const linkName = this.urlDatas.map((urlData)=> urlData.link_name);
       const clickData = this.urlDatas.map((urlData)=>urlData.clicks);
-      console.log(clickData);
+      // console.log(clickData);
       this.updateChartData(clickData, linkName);
      
       },
@@ -104,7 +117,7 @@ ngOnInit(): void {
 // Fonction pour mettre ajour les datasete
 updateChartData(newData:any, labelsData:any){
   if(this.chart && this.chart.data && this.chart.data.datasets){
-    console.log("********************", labelsData);
+    // console.log("********************", labelsData);
     this.chart.data.labels = labelsData
     this.chart.data.datasets[0].data = newData
     this.chart.update(); // Mettre ajour les information
@@ -124,7 +137,7 @@ updateChartData(newData:any, labelsData:any){
 
       this.apiService.addLink(data).subscribe({
         next: (response:url) =>{
-          console.log('success',response);
+          // console.log('success',response);
 
           // Ajouter un link a la liste 
            this.urlDatas.push(response.data)
@@ -133,12 +146,14 @@ updateChartData(newData:any, labelsData:any){
           
           // setTimeout(()=> this.refreshDiv = true, 0) // Fonction pour forcer le charger de la page
 
-          this.isOpen = !this.isOpen
+          this.isOpen = !this.isOpen // pour faire disparaitre la formulaire
+          this.linkError = false;  // pour suprimer le message d'erreur lors de la premiere tatantive
           // Suprimer l'element du formulaire apres l'envoyer
           this.linkForm.reset()
         },
         error: erro=>{
-          console.error('error', erro)
+          // console.error('error', erro)
+          this.linkError = !this.linkError
         }
       });
     }

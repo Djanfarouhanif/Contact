@@ -33,6 +33,10 @@
                  <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched ">
                     <small class="text-red-500">Le mot de passe doit contenir au moins 6 caractères.</small>
                  </div>
+                 <!-- message d'erreur global -->
+                  <div *ngIf="signupError">
+                    <small class="text-red-500">erreur de connexion</small>
+                  </div>
                 <!-- Button  -->
                <div class="w-full ">
                 <button [ngClass]="[signupForm.valid ? 'bg-btn': 'bg-[#f19bda]']" type="submit" [disabled]="!signupForm.valid" class="text-white w-full p-2   rounded-xl ">S'inscrire</button>
