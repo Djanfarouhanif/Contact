@@ -35,7 +35,12 @@ export class CreateComponent implements OnInit  {
       this.apiService.deleteLink(unique_code).subscribe({
         next: response=>{
           // console.log(response, 'success');
-          this.urlDatas = this.urlDatas.filter(item=> unique_code !== unique_code)
+          // this.urlDatas = this.urlDatas.filter(item=> unique_code !== unique_code)
+          
+          const index = this.urlDatas.findIndex(item=> item.unique_code  === unique_code);
+          if(index !== -1){
+              this.urlDatas.splice(index, 1)
+          };
           
         },
         error: erro=>{
