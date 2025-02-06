@@ -35,13 +35,15 @@ export class CreateComponent implements OnInit  {
       this.apiService.deleteLink(unique_code).subscribe({
         next: response=>{
           // console.log(response, 'success');
-          window.location.reload()
+          this.urlDatas = this.urlDatas.filter(item=> unique_code !== unique_code)
+          
         },
         error: erro=>{
           // console.error('erreur', erro)
         }
       })
   }
+
 
   // Récupere les données d'URL
   getUrls():void {
