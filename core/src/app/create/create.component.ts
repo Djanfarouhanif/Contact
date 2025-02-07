@@ -39,7 +39,14 @@ export class CreateComponent implements OnInit  {
           
           const index = this.urlDatas.findIndex(item=> item.unique_code  === unique_code);
           if(index !== -1){
-              this.urlDatas.splice(index, 1)
+          
+              this.urlDatas.splice(index, 1);
+             
+              const dataChart = this.urlDatas
+              const linkName = dataChart.map((item) => item.link_name);
+              const clickData = dataChart.map((item)=> item.clicks);
+
+              this.updateChartData(linkName, clickData);
           };
           
         },
