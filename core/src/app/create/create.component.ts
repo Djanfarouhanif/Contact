@@ -23,7 +23,8 @@ export class CreateComponent implements OnInit  {
   openMenus: {[key: string]: boolean} = {};
   linkForm!: FormGroup; // POUR FAIRE GERER LA FORMULAIRE 
   urlDatas: urlItem[] = [];  // LES DONNEES RECUPER DEPOUS LE BACKEND POUR POUR TOUT LES URLS
-  linkError:boolean = false; 
+  linkError:boolean = false; // Détecter les messages d'erreur
+  previousLength = 0; // Stocke la longueur précédente du list
 
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
@@ -41,12 +42,12 @@ export class CreateComponent implements OnInit  {
           if(index !== -1){
           
               this.urlDatas.splice(index, 1);
-             
+              this.previousLength = this.urlDatas.length
               const dataChart = this.urlDatas
               const linkName = dataChart.map((item) => item.link_name);
               const clickData = dataChart.map((item)=> item.clicks);
 
-              this.updateChartData(linkName, clickData);
+              this.updateChartData(clickData, linkName);
           };
           
         },
@@ -64,6 +65,7 @@ export class CreateComponent implements OnInit  {
      {
       next: (data:urlData) =>{
         this.urlDatas = data.data;
+        this.previousLength = this.urlDatas.length;
         // console.log(this.urlDatas)
       // After I change email by the link name 
       const linkName = this.urlDatas.map((urlData)=> urlData.link_name);
@@ -120,9 +122,9 @@ ngOnInit(): void {
     link_name: ['',[Validators.required ]],
     url: ['', [Validators.required]]
   });
-  // Initialisation du graphique
-  this.chart = new Chart('MyChart', this.config);
 
+  // Iniatiliasation de graphique
+  this.chart = new Chart('MyChart', this.config)
   // Récuper tout les objes url crée
   this.getUrls();
   
@@ -138,6 +140,27 @@ updateChartData(newData:any, labelsData:any){
   }
  
 };
+
+// ngDoCheck(){
+//   if(this.chart){
+//     // this.chart = new Chart('MyChart', this.config);
+//     this.chart.destroy()
+//   };
+
+//   this.chart = new Chart('MyChart', this.config)
+
+// }
+
+ngDoCheck(){
+  if(this.urlDatas.length !== this.previousLength){
+    this.previousLength = this.urlDatas.length
+    if(this.chart){
+      this.chart.update(); // Détruire L'ancien graphique
+    }
+
+    // Fonction pour déssiner la graphique
+  }
+}
 
   
   // Fonction pour ajouter un nouveau lien
@@ -155,6 +178,12 @@ updateChartData(newData:any, labelsData:any){
 
           // Ajouter un link a la liste 
            this.urlDatas.push(response.data)
+
+           this.previousLength = this.urlDatas.length
+           const linkName = this.urlDatas.map((item)=> item.link_name)
+           const clickData = this.urlDatas.map((item)=> item.clicks)
+
+           this.updateChartData(clickData, linkName)
           // // Mettre ajour les données
           //  this.refreshDiv = false
           
