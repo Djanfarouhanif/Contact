@@ -15,7 +15,8 @@ import { CommonModule} from '@angular/common'
 export class LoginComponent {
 
   loginForm!: FormGroup;
-  loginErro: boolean = false;
+  loginErro: boolean = false; // Les erreurs 
+  animation:Boolean = false ; // Un pop pour atteindre
 
     constructor(private router:Router, private fb : FormBuilder, private apiService: ApiService){
 
@@ -27,6 +28,7 @@ export class LoginComponent {
 
     onSubmit(){
 
+      this.animation = !this.animation
       // Verifier si la formulaire est valide avent d'executer 
       if(this.loginForm.valid){
 
@@ -46,9 +48,11 @@ export class LoginComponent {
             
             // Redirige ver la page de créeatin
             this.navigateToCreate()
+            this.animation = !this.animation
           },
           error: erro=>{
             this.loginErro = !this.loginErro
+            this.animation = !this.animation
           }
         })
       }

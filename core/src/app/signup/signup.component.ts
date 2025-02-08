@@ -19,6 +19,7 @@ export class SignupComponent implements OnInit {
 
   signupForm!: FormGroup;
   signupError: boolean = false;
+  animation:boolean = false; // Animation si onclick sur le button
 
     constructor(private router:Router, private apiService:ApiService, private fb:FormBuilder){}
 
@@ -33,6 +34,7 @@ export class SignupComponent implements OnInit {
 
     // Fonction pour terminer l'envoyer des données depuis backend
     sendData(){
+      this.animation = !this.animation
       // Valider la formulaire avant de lancer
       if (this.signupForm.valid ){
         // Récuperation des données
@@ -49,10 +51,12 @@ export class SignupComponent implements OnInit {
             // console.log(token);
             localStorage.setItem('token', token);
             this.router.navigate(['/create'])
+            this.animation = !this.animation
 
           },
           error: (err)=>{
             // console.error('Erreur dans le composant:', err)
+            this.animation = !this.animation
             this.signupError = !this.signupError
           }
         });
