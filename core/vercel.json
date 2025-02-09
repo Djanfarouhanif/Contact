@@ -3,14 +3,12 @@
     "builds": [
       {
         "src": "package.json",
-        "use": "@vercel/node"
+        "use": "@vercel/static-build"
       }
     ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/$1"
-      }
-    ]
+    "env": {
+      "NODE_ENV": "production"
+    },
+    "installCommand": "npm install"
   }
   
