@@ -29,7 +29,8 @@ module.exports = {
       },
       width: {
         "l30": 'calc(300px * 10)'
-      }
+      },
+     
     
 
     },
