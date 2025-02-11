@@ -9,7 +9,11 @@ import { loginData, signUpData,urlData , url} from './data';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl =[ 'http://127.0.0.1:8000/user/signup/', 'http://127.0.0.1:8000/clicks/get_url/', 'http://127.0.0.1:8000/clicks/create/', 'http://127.0.0.1:8000/login/login/','http://127.0.0.1:8000/clicks/'] // A Remplacer par le vrai api URL
+
+  
+  private apiUrl =[ 'https://djanfarou.pythonanywhere.com/user/signup/', 'https://djanfarou.pythonanywhere.com/clicks/get_url/', 'https://djanfarou.pythonanywhere.com/clicks/create/', 'https://djanfarou.pythonanywhere.com/login/login/','https://djanfarou.pythonanywhere.com//clicks/'] // A Remplacer par le vrai api URL
+  //private apiUrl =[ 'http://127.0.0.1:8000/user/signup/', 'http://127.0.0.1:8000/clicks/get_url/', 'http://127.0.0.1:8000/clicks/create/', 'https://djanfarou.pythonanywhere.com/login/login/','https://djanfarou.pythonanywhere.com//clicks/'] // A Remplacer par le vrai api URL
+
 
   constructor(private http:HttpClient) { }
 
