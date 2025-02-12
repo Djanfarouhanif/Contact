@@ -203,7 +203,12 @@ ngDoCheck(){
     
    
   };
- 
+  
+  // Fonction pour suprimer 
+  logout(){
+    localStorage.removeItem('token')
+    this.router.navigate(['/login'])
+  }
   // Fonction pour faire sortire le petit menu des projet crée
 
     LinkMenu(menuId: string):any{
