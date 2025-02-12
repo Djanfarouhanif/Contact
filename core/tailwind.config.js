@@ -30,6 +30,9 @@ module.exports = {
       width: {
         "l30": 'calc(300px * 10)'
       },
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif']
+      }
      
     
 
