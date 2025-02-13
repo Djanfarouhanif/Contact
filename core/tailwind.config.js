@@ -16,7 +16,8 @@ module.exports = {
         'scR': {'max': '700px'}
       },
       boxShadow: {
-        'shad': ' 0px 0px 2px 1px'
+        'shad': ' 0px 1px 2px white',
+        'body-shad': 'inset 0px 0px 82px 20px '
       },
       animation: {
         speed: 'speed 10s infinite linear'
@@ -32,7 +33,15 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Roboto', 'sans-serif']
+      },
+      backgroundImage: {
+        'carre': 'repeating-linear-gradient(90deg, rgba(245, 239, 239, 0.189) 1px, transparent 2px, transparent 30px), repeating-linear-gradient(rgba(245, 239, 239, 0.189) 0.1px , transparent 2px, transparent 30px) '
+      },
+      backgroundSize:{
+        'custom-carre': '30px 30px'
       }
+
+      
      
     
 
