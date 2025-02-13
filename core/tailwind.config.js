@@ -35,10 +35,10 @@ module.exports = {
         sans: ['Roboto', 'sans-serif']
       },
       backgroundImage: {
-        'carre': 'repeating-linear-gradient(90deg, rgba(245, 239, 239, 0.189) 1px, transparent 2px, transparent 30px), repeating-linear-gradient(rgba(245, 239, 239, 0.189) 0.1px , transparent 2px, transparent 30px) '
+        'carre': 'repeating-linear-gradient(90deg, rgba(245, 239, 239, 0.189) 1px, transparent 2px, transparent 40px), repeating-linear-gradient(rgba(245, 239, 239, 0.189) 0.1px , transparent 2px, transparent 40px) '
       },
       backgroundSize:{
-        'custom-carre': '30px 30px'
+        'custom-carre': '40px 40px'
       }
 
       
