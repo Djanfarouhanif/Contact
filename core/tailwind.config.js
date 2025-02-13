@@ -16,8 +16,8 @@ module.exports = {
         'scR': {'max': '700px'}
       },
       boxShadow: {
-        'shad': ' 0px 1px 2px white',
-        'body-shad': 'inset 0px 0px 82px 20px '
+        'shad': ' 0px 0px 5px white',
+        'body-shad': 'inset 0px 0px 82px  '
       },
       animation: {
         speed: 'speed 10s infinite linear'
